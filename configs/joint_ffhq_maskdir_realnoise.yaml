@@ -1,0 +1,62 @@
+seed: 1234
+
+data:
+  name: FFHQ
+  dataroot: /amax/xyf/data/FFHQ/
+  img_size: 256
+
+dataloader:
+  num_workers: 4
+  pin_memory: true
+  prefetch_factor: 2
+  micro_batch: 0
+
+mask:
+  mask_type: dir
+  dir_path: /amax/xyf/data/NVIDIAIrregularMaskDataset/train/
+  dir_invert_color: true
+  noise_type: real
+  real_dataset:
+    - name: CelebA-HQ
+      dataroot: /amax/xyf/data/CelebA-HQ/
+      img_size: 256
+    - name: ImageNet
+      dataroot: /amax/xyf/data/ImageNet/
+      img_size: 256
+  smooth_type: gaussian
+  smooth_kernel_size: 13
+  smooth_sigma: 3
+
+model:
+  mpn:
+    base_n_channels: 64
+    neck_n_channels: 128
+  rin:
+    base_n_channels: 32
+    neck_n_channels: 128
+
+train:
+  n_steps: 150000
+  batch_size: 4
+  pretrained: ~
+  resume: ~
+  print_freq: 100
+  save_freq: 5000
+  eval_freq: 1000
+  sample_freq: 1000
+
+  coef_rec: 1.4
+  coef_semantic: 0.0001
+  coef_idmrf: 0.001
+  coef_adv: 0.001
+  coef_mpn: 2.0
+
+  optim_mpn:
+    lr: 0.00001
+    betas: [0.5, 0.9]
+  optim_rin:
+    lr: 0.00001
+    betas: [0.5, 0.9]
+  optim_disc:
+    lr: 0.00001
+    betas: [0.5, 0.9]

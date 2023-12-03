@@ -12,7 +12,7 @@ Clone this repo:
 
 ```shell
 git clone https://github.com/xyfJASON/VCNet-pytorch.git
-cd Context-Encoder-pytorch
+cd VCNet-pytorch
 ```
 
 Create and activate a conda environment:
